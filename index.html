@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELNORA — Digital Work Platform</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7f9;
+    color: #14212b;
+}
+
+header {
+    background: #07151f;
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #20d69a;
+}
+
+header button {
+    background: transparent;
+    border: 1px solid #ffffff44;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 8px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #07151f, #123a40);
+    color: white;
+    padding: 70px 6%;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.badge {
+    display: inline-block;
+    border: 1px solid #ffffff30;
+    background: #ffffff10;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 70px);
+    line-height: 1;
+    margin: 20px 0;
+}
+
+h1 span {
+    color: #20d69a;
+}
+
+.hero p {
+    color: #c7d4da;
+    line-height: 1.7;
+    font-size: 17px;
+    max-width: 650px;
+}
+
+.buttons {
+    margin-top: 25px;
+}
+
+.primary {
+    background: #20d69a;
+    color: #052419;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid #ffffff40;
+    padding: 13px 20px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+section {
+    padding: 60px 6%;
+}
+
+.title {
+    text-align: center;
+    max-width: 650px;
+    margin: auto auto 30px;
+}
+
+.title h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.title p {
+    color: #687686;
+    line-height: 1.6;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e2e7eb;
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.icon {
+    font-size: 28px;
+}
+
+.card h3 {
+    margin: 12px 0 7px;
+}
+
+.card p {
+    color: #687686;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.how {
+    background: white;
+}
+
+.steps {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.step {
+    border: 1px solid #e2e7eb;
+    padding: 22px;
+    border-radius: 15px;
+}
+
+.number {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #e5faf3;
+    color: #079260;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.step p {
+    color: #687686;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+.dark {
+    background: #07151f;
+    color: white;
+}
+
+.dark .title p {
+    color: #b9c7cf;
+}
+
+.features {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.feature {
+    background: #ffffff09;
+    border: 1px solid #ffffff18;
+    padding: 22px;
+    border-radius: 15px;
+}
+
+.feature p {
+    color: #b9c7cf;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+footer {
+    background: #030a10;
+    color: #9baab4;
+    text-align: center;
+    padding: 30px 6%;
+    font-size: 13px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: #000000aa;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-box {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 17px;
+}
+
+.modal-box h2 {
+    margin-bottom: 8px;
+}
+
+.modal-box p {
+    color: #687686;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+    border: 1px solid #d8dfe5;
+    border-radius: 8px;
+}
+
+.full {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.close {
+    float: right;
+    border: none;
+    background: #edf1f4;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+@media(max-width:800px) {
+    .cards,
+    .steps,
+    .features {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:520px) {
+    .cards,
+    .steps,
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .secondary {
+        margin: 10px 0 0 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">VEL<span>NORA</span></div>
+    <button onclick="openLogin()">Sign In</button>
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            DIGITAL WORK • TASKS • OPPORTUNITIES
+        </span>
+
+        <h1>
+            Turn your time into
+            <span>digital opportunity.</span>
+        </h1>
+
+        <p>
+            Velnora is a digital work platform being built to help
+            people discover legitimate online tasks, remote opportunities
+            and skill-based work from one simple dashboard.
+        </p>
+
+        <div class="buttons">
+            <button class="primary" onclick="openLogin()">
+                Create Free Account
+            </button>
+
+            <button class="secondary" onclick="scrollToOpportunities()">
+                Explore Opportunities
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="opportunities">
+
+    <div class="title">
+        <h2>Multiple digital opportunities</h2>
+
+        <p>
+            Velnora will bring different categories of legitimate
+            digital work together in one platform.
+        </p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>AI Tasks</h3>
+            <p>
+                AI evaluation, data-labeling and other verified
+                AI-related tasks when available.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>Surveys</h3>
+            <p>
+                Research and opinion opportunities from supported
+                providers.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎧</div>
+            <h3>Transcription</h3>
+            <p>
+                Audio and text opportunities for eligible contributors.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💻</div>
+            <h3>Digital Work</h3>
+            <p>
+                Skill-based remote opportunities and online projects.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="how">
+
+    <div class="title">
+
+        <h2>How Velnora works</h2>
+
+        <p>
+            A simple process designed around real work.
+        </p>
+
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="number">1</div>
+
+            <h3>Create an account</h3>
+
+            <p>
+                Register and complete your profile.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="number">2</div>
+
+            <h3>Choose opportunities</h3>
+
+            <p>
+                Browse tasks available to your account.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="number">3</div>
+
+            <h3>Complete verified work</h3>
+
+            <p>
+                Submit qualifying work and receive approved earnings.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="dark">
+
+    <div class="title">
+
+        <h2>Built around real work</h2>
+
+        <p>
+            Velnora will separate genuine earning opportunities
+            from unsupported earning claims.
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+            <h3>Transparent Rewards</h3>
+            <p>
+                Users will see what an eligible task pays before
+                starting it.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>Verified Tasks</h3>
+            <p>
+                Withdrawable earnings should come from genuine
+                task or revenue sources.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>Mobile First</h3>
+            <p>
+                Designed to work smoothly for people using
+                smartphones.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <strong style="color:white;">VELNORA</strong>
+
+    <p style="margin-top:8px;">
+        Digital Work. Real Opportunities.
+    </p>
+
+    <p style="margin-top:15px;">
+        © 2026 Velnora. Platform prototype.
+    </p>
+
+</footer>
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeLogin()">×</button>
+
+        <h2>Join Velnora</h2>
+
+        <p>
+            Account registration will be connected to the secure
+            backend during the next development stage.
+        </p>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Your name"
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email address"
+        >
+
+        <button
+            class="primary full"
+            onclick="demoSignup()"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function openLogin() {
+    document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeLogin() {
+    document.getElementById("loginModal").style.display = "none";
+}
+
+function scrollToOpportunities() {
+    document
+        .getElementById("opportunities")
+        .scrollIntoView({behavior:"smooth"});
+}
+
+function demoSignup() {
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    if (!name || !email) {
+        alert("Please enter your name and email.");
+        return;
+    }
+
+    alert(
+        "Welcome to Velnora, " +
+        name +
+        "! The account system will be connected in the next stage."
+    );
+
+    closeLogin();
+}
+
+</script>
+
+</body>
+  </html>
