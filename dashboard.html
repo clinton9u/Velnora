@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velnora Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7f8;
+    color:#14221c;
+}
+
+header{
+    height:65px;
+    background:#071a13;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.menu-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.container{
+    display:flex;
+    min-height:calc(100vh - 65px);
+}
+
+.sidebar{
+    width:240px;
+    background:#0b2119;
+    color:white;
+    padding:25px 15px;
+}
+
+.sidebar h3{
+    font-size:12px;
+    color:#8fa69c;
+    margin:15px 10px 10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.sidebar a{
+    display:block;
+    color:#dce8e3;
+    text-decoration:none;
+    padding:13px 12px;
+    border-radius:8px;
+    margin-bottom:5px;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#19b96b;
+    color:#06170f;
+    font-weight:bold;
+}
+
+.main{
+    flex:1;
+    padding:25px;
+    max-width:1300px;
+}
+
+.welcome{
+    margin-bottom:25px;
+}
+
+.welcome h1{
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.welcome p{
+    color:#687770;
+}
+
+.demo{
+    display:inline-block;
+    background:#fff4d8;
+    color:#896200;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.stat{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.stat span{
+    display:block;
+    color:#73817b;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.stat strong{
+    font-size:25px;
+}
+
+.green{
+    color:#12a95e;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.section-title h2{
+    font-size:20px;
+}
+
+.section-title a{
+    color:#0da75b;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.tasks{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.task{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.task-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#e8f8ef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:15px;
+}
+
+.task h3{
+    margin-bottom:8px;
+    font-size:17px;
+}
+
+.task p{
+    color:#74817b;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.task button{
+    width:100%;
+    border:none;
+    background:#0da75b;
+    color:white;
+    padding:11px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.task button:hover{
+    background:#07884a;
+}
+
+.bottom-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:30px;
+}
+
+.panel{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.panel h2{
+    font-size:19px;
+    margin-bottom:18px;
+}
+
+.wallet-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #edf0ef;
+}
+
+.wallet-row:last-child{
+    border-bottom:none;
+}
+
+.wallet-row span{
+    color:#687770;
+}
+
+.referral-box{
+    background:#edf9f2;
+    padding:15px;
+    border-radius:10px;
+}
+
+.referral-link{
+    margin-top:10px;
+    background:white;
+    padding:11px;
+    border-radius:7px;
+    word-break:break-all;
+    font-size:13px;
+}
+
+.copy{
+    margin-top:10px;
+    border:none;
+    background:#0da75b;
+    color:white;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.mobile-nav{
+    display:none;
+}
+
+@media(max-width:900px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .tasks{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .bottom-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .main{
+        padding:18px;
+    }
+
+    .welcome h1{
+        font-size:23px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:15px;
+    }
+
+    .stat strong{
+        font-size:20px;
+    }
+
+    .tasks{
+        grid-template-columns:1fr;
+    }
+
+    .mobile-nav{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        height:62px;
+        background:#071a13;
+        justify-content:space-around;
+        align-items:center;
+        z-index:20;
+    }
+
+    .mobile-nav a{
+        color:#b9ccc3;
+        text-decoration:none;
+        text-align:center;
+        font-size:11px;
+    }
+
+    .mobile-nav a span{
+        display:block;
+        font-size:20px;
+        margin-bottom:2px;
+    }
+
+    body{
+        padding-bottom:65px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">VELNORA</div>
+    <button class="menu-btn" onclick="goHome()">⌂</button>
+</header>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <h3>Dashboard</h3>
+
+        <a href="#" class="active">🏠 Overview</a>
+        <a href="#tasks">📋 Tasks</a>
+        <a href="#wallet">💳 Wallet</a>
+        <a href="#referrals">👥 Referrals</a>
+
+        <h3>Account</h3>
+
+        <a href="#">👤 Profile</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="#" onclick="goHome()">🚪 Exit</a>
+
+    </aside>
+
+    <main class="main">
+
+        <section class="welcome">
+
+            <h1>Welcome to Velnora 👋</h1>
+
+            <p>Your digital work dashboard.</p>
+
+            <div class="demo">
+                DEMO DASHBOARD
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="stat">
+                <span>Available Balance</span>
+                <strong>₦0.00</strong>
+            </div>
+
+            <div class="stat">
+                <span>Total Earned</span>
+                <strong class="green">₦0.00</strong>
+            </div>
+
+            <div class="stat">
+                <span>Tasks Completed</span>
+                <strong>0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Pending Earnings</span>
+                <strong>₦0.00</strong>
+            </div>
+
+        </section>
+
+
+        <!-- TASKS -->
+
+        <section id="tasks">
+
+            <div class="section-title">
+
+                <h2>Available Opportunities</h2>
+
+                <a href="#">View all →</a>
+
+            </div>
+
+            <div class="tasks">
+
+                <div class="task">
+
+                    <div class="task-icon">🤖</div>
+
+                    <h3>AI Tasks</h3>
+
+                    <p>
+                        Complete legitimate AI-related digital tasks
+                        when available.
+                    </p>
+
+                    <button onclick="taskAlert('AI Tasks')">
+                        Explore
+                    </button>
+
+                </div>
+
+
+                <div class="task">
+
+                    <div class="task-icon">📋</div>
+
+                    <h3>Surveys</h3>
+
+                    <p>
+                        Participate in qualifying research surveys
+                        and feedback opportunities.
+                    </p>
+
+                    <button onclick="taskAlert('Surveys')">
+                        Explore
+                    </button>
+
+                </div>
+
+
+                <div class="task">
+
+                    <div class="task-icon">🎙️</div>
+
+                    <h3>Transcription</h3>
+
+                    <p>
+                        Convert audio and video content into
+                        accurate text.
+                    </p>
+
+                    <button onclick="taskAlert('Transcription')">
+                        Explore
+                    </button>
+
+                </div>
+
+
+                <div class="task">
+
+                    <div class="task-icon">💻</div>
+
+                    <h3>Digital Work</h3>
+
+                    <p>
+                        Discover remote digital work and
+                        online opportunities.
+                    </p>
+
+                    <button onclick="taskAlert('Digital Work')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WALLET + REFERRALS -->
+
+        <div class="bottom-grid">
+
+            <section class="panel" id="wallet">
+
+                <h2>💳 Wallet</h2>
+
+                <div class="wallet-row">
+                    <span>Available</span>
+                    <strong>₦0.00</strong>
+                </div>
+
+                <div class="wallet-row">
+                    <span>Pending</span>
+                    <strong>₦0.00</strong>
+                </div>
+
+                <div class="wallet-row">
+                    <span>Total earned</span>
+                    <strong>₦0.00</strong>
+                </div>
+
+                <button
+                    onclick="withdrawAlert()"
+                    style="
+                    margin-top:15px;
+                    width:100%;
+                    padding:12px;
+                    border:none;
+                    border-radius:8px;
+                    background:#dfe7e3;
+                    color:#65736c;
+                    font-weight:bold;
+                    ">
+                    Withdraw
+                </button>
+
+            </section>
+
+
+            <section class="panel" id="referrals">
+
+                <h2>👥 Referrals</h2>
+
+                <div class="referral-box">
+
+                    <p>
+                        Invite people to Velnora and earn
+                        referral rewards when the referral
+                        program becomes active.
+                    </p>
+
+                    <div class="referral-link">
+                        velnora.com/ref/your-account
+                    </div>
+
+                    <button class="copy" onclick="copyReferral()">
+                        Copy Link
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- MOBILE NAVIGATION -->
+
+<nav class="mobile-nav">
+
+    <a href="#">
+        <span>🏠</span>
+        Home
+    </a>
+
+    <a href="#tasks">
+        <span>📋</span>
+        Tasks
+    </a>
+
+    <a href="#wallet">
+        <span>💳</span>
+        Wallet
+    </a>
+
+    <a href="#referrals">
+        <span>👥</span>
+        Referrals
+    </a>
+
+</nav>
+
+
+<script>
+
+function taskAlert(task){
+
+    alert(
+        task +
+        " will appear here once Velnora is connected to real task providers."
+    );
+
+}
+
+function withdrawAlert(){
+
+    alert(
+        "Withdrawals are not active yet. Real payment processing will be connected after the Velnora backend and payment system are built."
+    );
+
+}
+
+function copyReferral(){
+
+    const link = "https://velnora.com/ref/your-account";
+
+    navigator.clipboard.writeText(link);
+
+    alert("Referral link copied!");
+
+}
+
+function goHome(){
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+  </html>
